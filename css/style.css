@@ -632,6 +632,27 @@ section > .container {
   font-size: 0.88rem;
 }
 
+/* Portrait phones and tablets crop the wide photo down to a narrow slice.
+   Swaran's head sits at ~74% across the photo, so the default centered
+   crop cuts it off. Shift the crop toward her, and move the logo and
+   buttons (with their glow) to the lower part of the banner so her face
+   isn't hidden behind them. */
+@media (max-width: 900px) and (orientation: portrait) {
+  .hero-fullbleed {
+    align-items: flex-end;
+  }
+
+  .hero-bg {
+    object-position: 85% 55%;
+  }
+
+  .hero-scrim {
+    background:
+      radial-gradient(75% 45% at 50% 74%, rgba(223, 163, 126, 0.92) 0%, rgba(223, 163, 126, 0.75) 45%, rgba(223, 163, 126, 0.42) 75%, rgba(223, 163, 126, 0.18) 100%),
+      linear-gradient(165deg, rgba(99, 21, 28, 0.18) 0%, rgba(51, 21, 43, 0.22) 100%);
+  }
+}
+
 @media (max-width: 560px) {
   .hero-fullbleed {
     min-height: 82vh;
