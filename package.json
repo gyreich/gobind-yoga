@@ -1,0 +1,12 @@
+{
+  "name": "gobind-yoga-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site for Gobind Yoga — Ashtanga yoga with Swaran Kaur Khalsa, Santa Fe, NM.",
+  "scripts": {
+    "process-images": "python3 scripts/process_images.py",
+    "verify": "node scripts/verify.js",
+    "build": "npm run process-images && npm run verify",
+    "start": "python3 -m http.server 8000"
+  }
+}

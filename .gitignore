@@ -1,0 +1,11 @@
+# Uncropped original photos show other students' and teachers' faces.
+# They stay on this computer only; scripts/process_images.py reads them
+# locally to regenerate images/.
+source-images/
+cropped-pics-to-substitute-for-others/
+
+.DS_Store
+node_modules/
+
+# Internal to-do list of missing site details; kept local only.
+CONTENT_NEEDED.md

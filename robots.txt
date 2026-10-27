@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# One-page site — a sitemap.xml isn't necessary, but a Sitemap: line can be
+# added here once the production domain is finalized if desired.
