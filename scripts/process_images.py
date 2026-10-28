@@ -9,7 +9,7 @@ Re-run this script any time source-images/ changes:
     python3 scripts/process_images.py
 """
 from pathlib import Path
-from PIL import Image, ImageOps
+from PIL import Image, ImageEnhance, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "source-images"
@@ -22,6 +22,17 @@ JPEG_Q = 82
 WEBP_Q = 78
 
 # (source filename, output basename, crop box or None (l, t, r, b) in source pixels)
+# Outputs listed in MIRROR are flipped left to right after cropping.
+MIRROR = {"seated-pranayama-class"}
+# Outputs listed in LIFT get their shadows and midtones brightened by this
+# gamma (highlights stay put, so bright windows don't blow out), plus a
+# touch of contrast and color, to sit level with the rest of the gallery.
+LIFT = {
+    "standing-balance-class": 1.8,
+    "hero-standing-bind": 1.25,
+    "standing-twist-home": 1.25,
+    "seated-pranayama-class": 1.5,
+}
 #
 # Privacy rule: Swaran is the only person who may be recognizable in any
 # photo. Every crop below cuts out other people's faces while keeping as
@@ -46,6 +57,18 @@ JOBS = [
     # lying in the background. Keeps the full backbend and the teacher's
     # hands at her feet, at the cost of her fingertips and the tops of her knees.
     ("IMG_3187.jpg", "assisted-backbend-training", (335, 2850, 3700, 4500)),
+    # Swaran seated in front; the top edge sits below the faces of the three
+    # students behind her, trimming only the top of her head wrap. The right
+    # edge (left, once mirrored) is trimmed to the forward fold's 3:4 shape.
+    ("IMG_5743.JPG", "seated-pranayama-class", (260, 690, 1278, 2048)),
+    # Home studio, Swaran alone. Trims a sliver on the left (part of another
+    # person) and the bottom edge (a stray pink item).
+    ("IMG_3198 (1).JPG", "standing-twist-home", (80, 0, 1536, 2180)),
+    # Phone screenshot of a video frame, with the pile of bags behind her
+    # painted out in GIMP (exported from the "cleaned up" .xcf). The crop
+    # drops the phone's top bar and the film strip, and the left edge clears
+    # the teacher standing beside her.
+    ("4434722A-CDDB-4C2A-96B2-9223BB15BA2E cleaned up.png", "arm-balance-class", (182, 130, 750, 1100)),
     # Narrow column around Swaran; the students around her are cut out.
     ("View recent photos 2.PNG", "standing-balance-class", (374, 464, 508, 868)),
 ]
@@ -58,6 +81,14 @@ def process(src_name, out_name, crop):
         img = img.convert("RGB")
     if crop:
         img = img.crop(crop)
+    if out_name in MIRROR:
+        img = ImageOps.mirror(img)
+    if out_name in LIFT:
+        gamma = LIFT[out_name]
+        curve = [round(255 * (i / 255) ** (1 / gamma)) for i in range(256)]
+        img = img.point(curve * 3)
+        img = ImageEnhance.Contrast(img).enhance(1.08)
+        img = ImageEnhance.Color(img).enhance(1.1)
 
     for label, max_w in (("", FULL_MAX_W), ("-thumb", THUMB_MAX_W)):
         w, h = img.size

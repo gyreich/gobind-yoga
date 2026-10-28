@@ -34,7 +34,7 @@ function renderPracticePanels() {
     <article class="practice-panel practice-panel--terracotta">
       <span class="practice-panel-label">Santa Fe Classes</span>
       <h3>${publicClass.name}</h3>
-      <p style="font-weight:600;">${publicClass.venueName} &middot; ${publicClass.venueCity}</p>
+      <p style="font-weight:600;"><span class="nowrap">${publicClass.venueName} &middot;</span> <span class="nowrap">${publicClass.venueCity}</span></p>
       <ul class="practice-panel-schedule">${publicClass.schedule.map(renderScheduleRow).join("")}</ul>
       <p class="practice-panel-note">${publicClass.registrationNote}</p>
       <div class="practice-panel-actions">
@@ -105,7 +105,7 @@ function renderGalleryItem(image, index) {
         </picture>
       </button>
     </li>
-  `;
+  ${image.rowEnd ? '\n    <li class="gallery-break" aria-hidden="true"></li>' : ""}`;
 }
 
 function renderInquiryOptions(selectedValue) {

@@ -78,7 +78,7 @@ const SITE_CONTENT = {
       venueUrl: "https://www.innersoundyoga.org/",
       venueLinkLabel: "Visit Luminecta Studio",
       registrationUrl: "https://www.innersoundyoga.org/pages/upcoming",
-      registrationLabel: "View Current Schedule & Register",
+      registrationLabel: "View Current Schedule and Register",
       registrationNote:
         "Registration and payment for these classes are handled by the hosting venue.",
     },
@@ -144,17 +144,16 @@ const SITE_CONTENT = {
   // gallery never repeats them. `width`/`height` are the pixel size of the
   // processed image; the gallery uses them to show every photo uncropped.
   gallery: [
+    // Two rows; rowEnd: true closes a row. Row one runs tall, wide, medium,
+    // tall with burgundy at both ends and in the middle. Row two puts the
+    // standing twist in the center, with the seated photo (mirrored so she
+    // faces in) on the left and the arm balance (legs reaching in) on the
+    // right; their red mat and red backpack frame the middle.
     {
       base: "hero-standing-bind",
       alt: "Swaran balances on one leg in a standing pose, hands pressed together at her chest, practicing in a sunlit studio.",
       width: 872,
       height: 2304,
-    },
-    {
-      base: "upward-dog-class",
-      alt: "Swaran lifts into upward-facing dog with her eyes closed during a group class.",
-      width: 1031,
-      height: 1525,
     },
     {
       base: "seated-forward-fold-home",
@@ -163,10 +162,35 @@ const SITE_CONTENT = {
       height: 2048,
     },
     {
+      base: "upward-dog-class",
+      alt: "Swaran lifts into upward-facing dog with her eyes closed during a group class.",
+      width: 1031,
+      height: 1525,
+    },
+    {
       base: "standing-balance-class",
       alt: "Swaran holds an extended standing leg pose during a group class in a bright studio.",
       width: 134,
       height: 404,
+      rowEnd: true,
+    },
+    {
+      base: "seated-pranayama-class",
+      alt: "Swaran sits cross-legged on a purple mat, eyes lowered, during a breathing practice in a group class.",
+      width: 1018,
+      height: 1358,
+    },
+    {
+      base: "standing-twist-home",
+      alt: "Swaran in a standing twist with one arm and one leg raised, on a purple mat in her home studio.",
+      width: 1456,
+      height: 2180,
+    },
+    {
+      base: "arm-balance-class",
+      alt: "Swaran balances on her hands with both legs extended, during a class in a sunny studio.",
+      width: 568,
+      height: 970,
     },
   ],
 };
