@@ -507,7 +507,9 @@ section > .container {
   background: var(--color-burgundy);
 }
 
-@media (max-width: 900px) {
+/* The full menu needs about 1240px to stay on one line, so narrower
+   screens (small laptops, tablets) use the menu button too. */
+@media (max-width: 1240px) {
   .nav-toggle {
     display: inline-block;
   }
@@ -663,6 +665,19 @@ section > .container {
   .hero-logo-mark {
     width: clamp(280px, 88vw, 460px);
   }
+}
+
+/* The training photo sits alone below the credentials, centered. */
+.training-photo {
+  max-width: 820px;
+  margin: var(--space-5) auto 0;
+}
+
+.training-photo figcaption {
+  margin-top: var(--space-2);
+  text-align: center;
+  color: var(--color-apricot);
+  font-weight: 600;
 }
 
 /* ---- Ornamental photo frame ----------------------------------------------

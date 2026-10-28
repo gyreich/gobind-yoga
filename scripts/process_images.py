@@ -9,7 +9,7 @@ Re-run this script any time source-images/ changes:
     python3 scripts/process_images.py
 """
 from pathlib import Path
-from PIL import Image, ImageEnhance, ImageOps
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "source-images"
@@ -27,6 +27,12 @@ MIRROR = {"seated-pranayama-class"}
 # Outputs listed in LIFT get their shadows and midtones brightened by this
 # gamma (highlights stay put, so bright windows don't blow out), plus a
 # touch of contrast and color, to sit level with the rest of the gallery.
+# Outputs listed in BLUR get these ellipses (l, t, r, b in source pixels,
+# before cropping) blurred beyond recognition: background faces that a
+# crop can't remove without losing part of Swaran's pose.
+BLUR = {
+    "assisted-backbend-training": [(990, 2600, 1200, 2860), (300, 2870, 500, 3100)],
+}
 LIFT = {
     "standing-balance-class": 1.8,
     "hero-standing-bind": 1.25,
@@ -52,11 +58,10 @@ JOBS = [
     # Swaran's downward dog only: drops the teacher and students on the left
     # and the student in the foreground, whose head sits just below her hands.
     ("IMG_6175.JPG", "group-class-mysore-room", (955, 540, 2048, 1345)),
-    # Top edge sits just below the assisting teacher's chin (and the student
-    # photographing behind him); left edge clears the face of the student
-    # lying in the background. Keeps the full backbend and the teacher's
-    # hands at her feet, at the cost of her fingertips and the tops of her knees.
-    ("IMG_3187.jpg", "assisted-backbend-training", (335, 2850, 3700, 4500)),
+    # Manju Jois assisting Swaran (he gave permission to be shown, 2026-10-28).
+    # The top edge includes his head; the faces of the student photographing
+    # behind them and the student lying on the left are blurred (see BLUR).
+    ("IMG_3187.jpg", "assisted-backbend-training", (335, 2200, 3700, 4500)),
     # Swaran seated in front; the top edge sits below the faces of the three
     # students behind her, trimming only the top of her head wrap. The right
     # edge (left, once mirrored) is trimmed to the forward fold's 3:4 shape.
@@ -79,6 +84,13 @@ def process(src_name, out_name, crop):
     img = ImageOps.exif_transpose(img)
     if img.mode != "RGB":
         img = img.convert("RGB")
+    if out_name in BLUR:
+        mask = Image.new("L", img.size, 0)
+        draw = ImageDraw.Draw(mask)
+        for box in BLUR[out_name]:
+            draw.ellipse(box, fill=255)
+        mask = mask.filter(ImageFilter.GaussianBlur(25))
+        img = Image.composite(img.filter(ImageFilter.GaussianBlur(40)), img, mask)
     if crop:
         img = img.crop(crop)
     if out_name in MIRROR:

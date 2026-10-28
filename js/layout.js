@@ -7,7 +7,7 @@
   const NAV_ITEMS = [
     { key: "home", href: "#home", label: "Home" },
     { key: "about", href: "#about", label: "About Swaran" },
-    { key: "ashtanga", href: "#ashtanga", label: "What Is Ashtanga?" },
+    { key: "ashtanga", href: "#ashtanga", label: "What Is Ashtanga Yoga?" },
     { key: "practice", href: "#practice", label: "Practice with Swaran", primary: true },
     { key: "gallery", href: "#gallery", label: "Gallery" },
     { key: "contact", href: "#contact", label: "Contact" },
@@ -98,7 +98,7 @@
       }
     });
 
-    const mediaQuery = window.matchMedia("(min-width: 901px)");
+    const mediaQuery = window.matchMedia("(min-width: 1241px)");
     mediaQuery.addEventListener("change", (e) => {
       if (e.matches) close();
     });
