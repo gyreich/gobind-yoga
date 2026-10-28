@@ -28,8 +28,11 @@ WEBP_Q = 78
 # much of Swaran's pose as the framing allows. The "*-cropped" sources are
 # hand-made crops (originals: cropped-pics-to-substitute-for-others/).
 JOBS = [
-    # Starts below the faces of the students and teacher behind her.
-    ("hero-swaran-side-plank.png", "hero-swaran-side-plank", (0, 650, 1186, 1327)),
+    # Already cropped below the faces of the students and teacher behind her
+    # (from hero-swaran-side-plank.png at (0, 650, 1186, 1327)), with the
+    # skirt, legs and shoe behind her head painted out in GIMP
+    # (source-images/hero-swaran-side-plank.xcf).
+    ("hero-swaran-side-plank-edited.png", "hero-swaran-side-plank", None),
     ("standing-bind-cropped.JPG", "hero-standing-bind", None),
     ("backbend-kneeling-cropped.JPG", "backbend-kneeling", None),
     ("extended-leg-cropped.JPG", "extended-leg-pose", None),
