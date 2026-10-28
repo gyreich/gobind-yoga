@@ -576,15 +576,17 @@ section > .container {
   object-position: 50% 55%;
 }
 
-/* A fuller, warm wash — the photo reads as backdrop atmosphere rather than
-   a sharp discrete image, with a stronger glow concentrated behind the logo
-   for maximum contrast. Terracotta-forward throughout so it stays warm
-   rather than gray or muddy; burgundy/plum only deepen the outer edges. */
+/* A light warm wash over the whole photo, with a stronger glow held in a
+   flat band behind the logo for contrast. The band stays low enough that
+   Swaran's face (upper right) shows through. Terracotta-forward throughout
+   so it stays warm rather than gray or muddy; burgundy/plum only deepen
+   the outer edges. */
 .hero-scrim {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60% 60% at 50% 42%, rgba(223, 163, 126, 0.92) 0%, rgba(223, 163, 126, 0.75) 45%, rgba(223, 163, 126, 0.5) 70%, rgba(223, 163, 126, 0.32) 100%),
+    radial-gradient(56% 21% at 50% 58%, rgba(223, 163, 126, 0.85) 0%, rgba(223, 163, 126, 0.6) 50%, rgba(223, 163, 126, 0) 100%),
+    linear-gradient(rgba(223, 163, 126, 0.22), rgba(223, 163, 126, 0.22)),
     linear-gradient(165deg, rgba(99, 21, 28, 0.18) 0%, rgba(51, 21, 43, 0.22) 100%);
 }
 
