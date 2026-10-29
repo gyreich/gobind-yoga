@@ -158,8 +158,8 @@ const SITE_CONTENT = {
     {
       base: "seated-forward-fold-home",
       alt: "Swaran practices a deep seated forward fold on a mat at home.",
-      width: 1536,
-      height: 2048,
+      width: 1020,
+      height: 1020,
     },
     {
       base: "upward-dog-class",

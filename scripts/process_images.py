@@ -54,7 +54,9 @@ JOBS = [
     ("backbend-kneeling-cropped.JPG", "backbend-kneeling", None),
     ("extended-leg-cropped.JPG", "extended-leg-pose", None),
     ("upward-dog-cropped.png", "upward-dog-class", None),
-    ("IMG_6174.JPG", "seated-forward-fold-home", None),
+    # Square crop centered on Swaran and her mat, so she fills the frame;
+    # the top edge sits just below the wall and baseboard.
+    ("IMG_6174.JPG", "seated-forward-fold-home", (240, 600, 1260, 1620)),
     # Swaran's downward dog only: drops the teacher and students on the left
     # and the student in the foreground, whose head sits just below her hands.
     ("IMG_6175.JPG", "group-class-mysore-room", (955, 540, 2048, 1345)),
