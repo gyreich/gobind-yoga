@@ -79,6 +79,23 @@ keep = np.asarray(keep).astype(float)[..., None] / 255
 apply(floor, fm * seam_fade * (1 - keep))
 apply(out_a * 0.8, poly_mask([(0, 623), (262, 626), (262, 629), (0, 626)], 0.8) * 0.6)
 
+# 4b. The short white wall at the left comes toward the camera, so its
+# baseboard turns the corner at x=95 and angles down to the left.
+CX = 95
+def side(y_at_corner, y_at_edge):
+    return [(CX, y_at_corner), (0, y_at_edge)]
+top_c, top_e = 587, 606                               # baseboard top at corner / left edge
+bot_c, bot_e = 624, 657                               # floor line at corner / left edge
+white2 = np.zeros_like(a); white2[:] = np.array([216, 221, 226]); white2 += noise(2.5, 0.8)
+apply(white2, poly_mask([(0, 580), (CX, 580), (CX, top_c), (0, top_e)], 0.7))
+side_base = np.zeros_like(a); side_base[:] = np.array([221, 216, 213]); side_base += noise(3, 0.8)
+apply(side_base, poly_mask([(0, top_e), (CX, top_c), (CX, bot_c), (0, bot_e)], 0.7))
+# thin shadow along the top of the side baseboard and at the floor line
+apply(out_a * 0.88, poly_mask([(0, top_e - 1), (CX, top_c - 1), (CX, top_c + 1), (0, top_e + 1)], 0.6) * 0.8)
+apply(out_a * 0.8, poly_mask([(0, bot_e - 2), (CX, bot_c - 2), (CX, bot_c + 1), (0, bot_e + 1)], 0.8) * 0.6)
+# the inside corner itself: a soft vertical shadow up the baseboard
+apply(out_a * 0.85, poly_mask([(CX - 1, top_c), (CX + 2, top_c), (CX + 2, bot_c), (CX - 1, bot_c)], 0.8) * 0.7)
+
 # 5. Two stray grey dots left of the heater.
 for (cx, cy, r) in [(3, 140, 9), (93, 296, 6)]:
     y0, y1, x0, x1 = max(cy - r, 0), cy + r, max(cx - r, 0), cx + r
