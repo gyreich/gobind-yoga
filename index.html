@@ -230,7 +230,7 @@
             <li class="contact-reason"><h3>General questions</h3><p>Anything else about practicing with Gobind Yoga.</p></li>
           </ul>
           <p class="form-note" style="margin-top: var(--space-3);">
-            Gobind Yoga is finalizing its direct contact details. You're welcome to fill out the form so your message is ready to send — online submission isn't connected yet, so please check back soon.
+            Prefer email? Write to <a href="mailto:hello@gobindyoga.com">hello@gobindyoga.com</a>.
           </p>
         </div>
 
@@ -252,6 +252,8 @@
               <label for="contact-message">Message</label>
               <textarea id="contact-message" name="message" required></textarea>
             </div>
+            <!-- Spam trap: hidden from people, so only bots tick it. -->
+            <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
             <button type="submit" class="btn btn-primary">Send Inquiry</button>
             <div id="form-status" class="form-status" tabindex="-1"></div>
           </form>

@@ -7,10 +7,9 @@
  *    since everything lives on one page.
  *  - A `?inquiry=` query parameter is still honored on load, for any
  *    external link that points straight at #contact with a preselected type.
- *  - LAUNCH REQUIREMENT: SITE_CONTENT.contact.formConnected is false because
- *    no email address or form-handling service has been supplied yet (see
- *    CONTENT_NEEDED.md). The form renders fully but submitting it shows an
- *    honest "not connected yet" status instead of a fake success message.
+ *  - Submitting posts the message to Web3Forms, which emails it to
+ *    Swaran's inbox. Replying to that email goes straight to the visitor.
+ *    If sending fails, the status points visitors to the email address.
  */
 (function () {
   function setInquiry(value) {
@@ -37,17 +36,55 @@
     const status = document.getElementById("form-status");
     if (!form || !status) return;
 
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      if (!SITE_CONTENT.contact.formConnected) {
-        status.textContent =
-          "This form isn't connected to an inbox yet, so it can't be submitted online. Please check back soon — Gobind Yoga's contact details will appear on this page once available.";
-      } else {
-        status.textContent = "Thank you — your message has been sent.";
-      }
+    const button = form.querySelector('button[type="submit"]');
+
+    function showStatus(message) {
+      status.textContent = message;
       status.classList.add("is-visible");
       status.setAttribute("role", "status");
       status.focus();
+    }
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const contact = SITE_CONTENT.contact;
+      if (!contact.formConnected) return;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const data = new FormData(form);
+      const inquiry = contact.inquiryTypes.find((t) => t.value === data.get("inquiryType"));
+      const payload = {
+        access_key: contact.web3formsAccessKey,
+        subject: `New inquiry from gobindyoga.com: ${inquiry ? inquiry.label : "General question"}`,
+        from_name: "Gobind Yoga website",
+        name: data.get("name"),
+        email: data.get("email"),
+        replyto: data.get("email"),
+        "What is this about?": inquiry ? inquiry.label : "",
+        message: data.get("message"),
+        botcheck: data.get("botcheck") ? true : "",
+      };
+
+      button.disabled = true;
+      showStatus("Sending…");
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+        if (!result.success) throw new Error(result.message);
+        form.reset();
+        showStatus("Thank you. Your message has been sent, and Swaran will be in touch soon.");
+      } catch (err) {
+        showStatus(`Sorry, your message couldn't be sent. Please try again, or email ${contact.email}.`);
+      } finally {
+        button.disabled = false;
+      }
     });
   });
 })();

@@ -106,14 +106,14 @@ const SITE_CONTENT = {
   },
 
   contact: {
-    // Populate once Swaran supplies a real, monitored address. Never invent one.
-    email: null,
+    // Forwards to gobindyoga108@gmail.com through Cloudflare Email Routing.
+    email: "hello@gobindyoga.com",
     phone: null,
-    // Set true once a real form backend (e.g. Formspree, Netlify Forms, a
-    // mailto service) is wired up. Until then the contact form renders but
-    // clearly tells visitors it isn't connected yet, instead of pretending
-    // to send.
-    formConnected: false,
+    // The contact form posts to Web3Forms, which emails each message to
+    // gobindyoga108@gmail.com. The access key is public by design: it only
+    // names the inbox, and the form is limited to https://gobindyoga.com.
+    formConnected: true,
+    web3formsAccessKey: "f444f853-0042-4e02-9c75-572d5e4b1585",
     inquiryTypes: [
       { value: "private-lessons", label: "Private lessons" },
       { value: "online-instruction", label: "Online instruction" },
