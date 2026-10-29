@@ -72,10 +72,11 @@ JOBS = [
     # person) and the bottom edge (a stray pink item).
     ("IMG_3198 (1).JPG", "standing-twist-home", (80, 0, 1536, 2180)),
     # Phone screenshot of a video frame, with the pile of bags behind her
-    # painted out in GIMP (exported from the "cleaned up" .xcf). The crop
+    # painted out in GIMP (exported from the "cleaned up" .xcf), then the
+    # wall, baseboard and floor rebuilt by scripts/retouch_handstand.py. The crop
     # drops the phone's top bar and the film strip, and the left edge clears
     # the teacher standing beside her.
-    ("4434722A-CDDB-4C2A-96B2-9223BB15BA2E cleaned up.png", "arm-balance-class", (182, 130, 750, 1100)),
+    ("4434722A-CDDB-4C2A-96B2-9223BB15BA2E retouched.png", "arm-balance-class", (182, 130, 750, 1100)),
     # Narrow column around Swaran; the students around her are cut out.
     ("View recent photos 2.PNG", "standing-balance-class", (374, 464, 508, 868)),
 ]
