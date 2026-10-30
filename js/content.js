@@ -38,7 +38,7 @@ const SITE_CONTENT = {
   credentials: [
     {
       title: "Level 1 and Level 2 Authorization",
-      teacher: "Manju Jois",
+      teacher: "with Manju Jois, Master of Ashtanga Yoga",
     },
     {
       title: "Primary, Intermediate, and Third Series Teacher Training",
