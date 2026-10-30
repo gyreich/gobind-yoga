@@ -1295,3 +1295,49 @@ section > .container {
   font-weight: 700;
   font-style: normal;
 }
+
+/* ---- Upcoming workshop ------------------------------------------------------ */
+.workshop h2 {
+  max-width: 18ch;
+}
+
+.workshop-card {
+  padding: var(--space-2) var(--space-3) var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.workshop-card .practice-panel-schedule {
+  margin-top: 0;
+  border-top: 0;
+}
+
+.workshop-card .text-link {
+  color: var(--color-gold);
+}
+
+.workshop .button-row {
+  margin-top: var(--space-3);
+}
+
+.workshop-note {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.workshop-photo {
+  margin: 0;
+}
+
+.workshop-photo figcaption {
+  margin-top: var(--space-2);
+  text-align: center;
+  font-weight: 600;
+  color: var(--color-burgundy);
+}
+
+/* On a phone the photo leads, right under the heading area's top. */
+@media (max-width: 900px) {
+  .workshop-photo {
+    order: -1;
+  }
+}

@@ -71,6 +71,9 @@ JOBS = [
     # Home studio, Swaran alone. Trims a sliver on the left (part of another
     # person) and the bottom edge (a stray pink item).
     ("IMG_3198 (1).JPG", "standing-twist-home", (80, 0, 1536, 2180)),
+    # Manju and Sathu Jois, for the February 2027 workshop section (both gave
+    # permission). The left edge drops another person's clothing.
+    ("Jois family.JPEG", "jois-workshop", (115, 0, 1239, 933)),
     # Phone screenshot of a video frame, with the pile of bags behind her
     # painted out in GIMP (exported from the "cleaned up" .xcf), then the
     # wall, baseboard and floor rebuilt by scripts/retouch_handstand.py. The crop

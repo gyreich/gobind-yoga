@@ -117,6 +117,7 @@ const SITE_CONTENT = {
     inquiryTypes: [
       { value: "private-lessons", label: "Private lessons" },
       { value: "online-instruction", label: "Online instruction" },
+      { value: "jois-workshop", label: "Jois workshop, February 2027" },
       { value: "workshops", label: "Workshops" },
       { value: "host-inquiry", label: "Hosting Swaran (studio, club, or health facility)" },
       { value: "general", label: "General question" },
