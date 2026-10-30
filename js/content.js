@@ -45,10 +45,6 @@ const SITE_CONTENT = {
       teacher: "Tim Miller",
     },
     {
-      title: "Intermediate Series and Teacher Training",
-      teacher: "David Garrigues",
-    },
-    {
       title: "Pranayama and Meditation Training",
       teacher: null,
     },
@@ -105,6 +101,37 @@ const SITE_CONTENT = {
     serviceArea: null, // CONTENT NEEDED — see CONTENT_NEEDED.md
   },
 
+  // The upcoming workshop: a section right after the banner, a line under
+  // the banner's buttons that links to it, and a choice in the contact
+  // form. All three hide themselves the day after `endDate`, so nothing
+  // needs taking down. To post the next workshop, replace these fields
+  // (and add its photo to scripts/process_images.py). Set `workshop: null`
+  // when there's none.
+  workshop: {
+    endDate: "2027-02-05",
+    banner: "Jois workshop &middot; Feb&nbsp;1&ndash;5, Encinitas",
+    eyebrow: "Upcoming Workshop",
+    title: "Mysore Ashtanga Yoga with Manju and Sathu&nbsp;Jois",
+    paragraphs: [
+      "Five mornings of traditional Mysore-style practice in Encinitas, California, with Manju and Sathu Jois.",
+      "Each morning includes Mysore practice, chanting, pranayama, and questions and answers, followed by a vegetarian lunch.",
+    ],
+    details: [
+      { label: "Dates", value: "February 1&ndash;5, 2027" },
+      { label: "Time", value: "9&nbsp;a.m.&ndash;1&nbsp;p.m." },
+      { label: "Place", value: "Encinitas, CA" },
+      { label: "Tuition", value: "$700, all five days" },
+    ],
+    inquiry: { value: "jois-workshop", label: "Jois workshop, February 2027", short: "Jois workshop" },
+    photo: {
+      src: "images/jois-workshop.jpg",
+      width: 1124,
+      height: 933,
+      alt: "Sathu Jois and Manju Jois sit side by side in a yoga room, smiling, with a colorful mural behind them.",
+      caption: "Sathu and Manju Jois",
+    },
+  },
+
   contact: {
     // Forwards to gobindyoga108@gmail.com through Cloudflare Email Routing.
     email: "hello@gobindyoga.com",
@@ -117,7 +144,6 @@ const SITE_CONTENT = {
     inquiryTypes: [
       { value: "private-lessons", label: "Private lessons" },
       { value: "online-instruction", label: "Online instruction" },
-      { value: "jois-workshop", label: "Jois workshop, February 2027" },
       { value: "workshops", label: "Workshops" },
       { value: "host-inquiry", label: "Hosting Swaran (studio, club, or health facility)" },
       { value: "general", label: "General question" },

@@ -14,7 +14,7 @@
 (function () {
   function setInquiry(value) {
     const select = document.getElementById("inquiry-type");
-    if (select && SITE_CONTENT.contact.inquiryTypes.some((t) => t.value === value)) {
+    if (select && inquiryTypes().some((t) => t.value === value)) {
       select.value = value;
     }
   }
@@ -55,7 +55,7 @@
       }
 
       const data = new FormData(form);
-      const inquiry = contact.inquiryTypes.find((t) => t.value === data.get("inquiryType"));
+      const inquiry = inquiryTypes().find((t) => t.value === data.get("inquiryType"));
       const payload = {
         access_key: contact.web3formsAccessKey,
         subject: `New inquiry from gobindyoga.com: ${inquiry ? inquiry.label : "General question"}`,

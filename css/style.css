@@ -1296,14 +1296,40 @@ section > .container {
   font-style: normal;
 }
 
-/* ---- Upcoming workshop ------------------------------------------------------ */
+/* ---- Upcoming workshop ------------------------------------------------------
+   Computer: text and details at left, photo at right. Phone: the heading
+   comes first so the photo has context, then the photo, then the details. */
+.workshop {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "intro photo"
+    "details photo";
+  column-gap: var(--space-5);
+  align-items: center;
+}
+
+.workshop-intro { grid-area: intro; align-self: end; }
+.workshop-photo { grid-area: photo; margin: 0; }
+.workshop-details { grid-area: details; align-self: start; }
+
+@media (max-width: 900px) {
+  .workshop {
+    grid-template-columns: 1fr;
+    grid-template-areas: "intro" "photo" "details";
+  }
+  .workshop-photo {
+    margin: var(--space-2) 0 var(--space-3);
+  }
+}
+
 .workshop h2 {
   max-width: 18ch;
 }
 
 .workshop-card {
   padding: var(--space-2) var(--space-3) var(--space-3);
-  margin-top: var(--space-3);
+  margin-top: var(--space-1);
 }
 
 .workshop-card .practice-panel-schedule {
@@ -1324,10 +1350,6 @@ section > .container {
   font-size: 0.95rem;
 }
 
-.workshop-photo {
-  margin: 0;
-}
-
 .workshop-photo figcaption {
   margin-top: var(--space-2);
   text-align: center;
@@ -1335,9 +1357,36 @@ section > .container {
   color: var(--color-burgundy);
 }
 
-/* On a phone the photo leads, right under the heading area's top. */
-@media (max-width: 900px) {
-  .workshop-photo {
-    order: -1;
-  }
+/* The line under the banner's buttons that points to the workshop. */
+.hero-announcement {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: var(--space-3);
+  padding: 0.45rem 1rem 0.45rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(247, 241, 237, 0.82);
+  color: var(--color-plum);
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(51, 21, 43, 0.18);
+  transition: background-color 0.15s ease;
+}
+
+.hero-announcement:hover {
+  background: var(--color-ivory);
+}
+
+.hero-announcement-tag {
+  background: var(--color-burgundy);
+  color: var(--color-ivory);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
 }

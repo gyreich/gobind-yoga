@@ -108,8 +108,60 @@ function renderGalleryItem(image, index) {
   ${image.rowEnd ? '\n    <li class="gallery-break" aria-hidden="true"></li>' : ""}`;
 }
 
+/** The upcoming workshop, or null once its last day has passed. */
+function activeWorkshop() {
+  const w = SITE_CONTENT.workshop;
+  if (!w) return null;
+  const lastDay = new Date(w.endDate + "T23:59:59");
+  return new Date() <= lastDay ? w : null;
+}
+
+/** Contact-form choices, with the upcoming workshop first while it's on. */
+function inquiryTypes() {
+  const w = activeWorkshop();
+  return w ? [w.inquiry, ...SITE_CONTENT.contact.inquiryTypes] : SITE_CONTENT.contact.inquiryTypes;
+}
+
+function renderWorkshopBanner(w) {
+  return `<a class="hero-announcement" href="#workshop"><span class="hero-announcement-tag">Upcoming</span> ${w.banner} <span aria-hidden="true">&rarr;</span></a>`;
+}
+
+function renderWorkshop(w) {
+  const rows = w.details
+    .map((d) => `<div class="schedule-row"><span class="marker-day">${d.label}</span><span>${d.value}</span></div>`)
+    .join("");
+  return `
+    <div class="texture-dots" aria-hidden="true"></div>
+    <div class="container workshop">
+      <div class="workshop-intro">
+        <p class="eyebrow">${w.eyebrow}</p>
+        <div class="ornament-rule" aria-hidden="true"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+        <h2>${w.title}</h2>
+        ${w.paragraphs.map((p) => `<p>${p}</p>`).join("")}
+      </div>
+      <figure class="workshop-photo">
+        <div class="photo-frame photo-frame--simple">
+          <div class="photo-frame__inner">
+            <img src="${w.photo.src}" alt="${w.photo.alt}" width="${w.photo.width}" height="${w.photo.height}" loading="lazy" />
+          </div>
+        </div>
+        <figcaption>${w.photo.caption}</figcaption>
+      </figure>
+      <div class="workshop-details">
+        <div class="practice-panel practice-panel--burgundy workshop-card">
+          <div class="practice-panel-schedule">${rows}</div>
+          <p class="workshop-note">To reserve a place, send Swaran a message and choose &ldquo;${w.inquiry.short}&rdquo;, or write to <a class="text-link" href="mailto:${SITE_CONTENT.contact.email}">${SITE_CONTENT.contact.email}</a>.</p>
+        </div>
+        <div class="button-row">
+          <a class="btn btn-primary" href="#contact" data-inquiry="${w.inquiry.value}">Register with Swaran</a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderInquiryOptions(selectedValue) {
-  return SITE_CONTENT.contact.inquiryTypes
+  return inquiryTypes()
     .map((opt) => {
       const selected = opt.value === selectedValue ? " selected" : "";
       return `<option value="${opt.value}"${selected}>${opt.label}</option>`;
