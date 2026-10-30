@@ -459,12 +459,16 @@ section > .container {
   top: 22px;
 }
 
+/* The two outer lines are positioned against the middle line, not the
+   button, so they need their own left of 0 to sit straight above and below it. */
 .nav-toggle-icon::before {
   top: -7px;
+  left: 0;
 }
 
 .nav-toggle-icon::after {
   top: 7px;
+  left: 0;
 }
 
 .primary-nav ul {
